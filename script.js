@@ -10,14 +10,17 @@ function calculate() {
   const currency_one = currencyEl_one.value;
   const currency_two = currencyEl_two.value;
 
-  fetch(`https://api.exchangeratesapi.io/latest?base=${currency_one}`)
+  fetch(
+    `https://v6.exchangerate-api.com/v6/2ebb67afc9b9e1746ba2ce74/latest/${currency_one}`
+  )
     .then((ans) => ans.json())
     .then((data) => {
-      const rate = data.rates[currency_two];
+      console.log(data);
+      const rate = data.conversion_rates[currency_two];
 
       rateEl.innerHTML = `1 ${currency_one} = ${rate} ${currency_two}`;
 
-      amountEl_two.value = (amountEl_one.value * rate).toFixed;
+      amountEl_two.value = (amountEl_one.value * rate).toFixed(2);
     });
 }
 
